@@ -1,0 +1,43 @@
+
+ Problem:
+
+ Imagine that you’re creating a data mining application that analyzes corporate documents. 
+ Users feed the app documents in various formats (PDF, DOC, CSV), and it tries to extract meaningful data from these docs in a uniform format.
+
+ The first version of the app could work only with DOC files. In the following version, it was able to support CSV files.
+ A month later, you “taught” it to extract data from PDF files.
+
+
+Solution:
+
+The Template Method pattern suggests that you break down an algorithm into a series of steps,
+turn these steps into methods, and put a series of calls to these methods inside a single template method. 
+The steps may either be abstract, or have some default implementation.
+To use the algorithm, the client is supposed to provide its own subclass, implement all abstract steps,
+ and override some of the optional ones if needed (but not the template method itself).
+
+
+Applicability:
+
+1.Use the Template Method pattern when you want to let clients extend only particular steps of an algorithm,
+  but not the whole algorithm or its structure.
+
+2.Use the pattern when you have several classes that contain almost identical algorithms with some minor differences. 
+  As a result, you might need to modify all classes when the algorithm changes.
+
+How to Implement:
+
+1.Analyze the target algorithm to see whether you can break it into steps. 
+  Consider which steps are common to all subclasses and which ones will always be unique.
+
+2.Create the abstract base class and declare the template method and a set of abstract methods representing the algorithm’s steps.
+  Outline the algorithm’s structure in the template method by executing corresponding steps. 
+  Consider making the template method final to prevent subclasses from overriding it.
+
+3.It’s okay if all the steps end up being abstract. However, some steps might benefit from having a default implementation. 
+  Subclasses don’t have to implement those methods.
+
+4.Think of adding hooks between the crucial steps of the algorithm.
+
+5.For each variation of the algorithm, create a new concrete subclass. It must implement all of the abstract steps,
+  but may also override some of the optional ones.
